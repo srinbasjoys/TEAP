@@ -1,0 +1,144 @@
+{
+  "brand_identity": {
+    "name": "TechResona Pvt Ltd",
+    "archetype": "Swiss & High-Contrast (Tech Variant)",
+    "tone": "Authoritative, Precise, Global, Future-Ready",
+    "core_values": ["Trust", "Innovation", "Clarity", "Efficiency"],
+    "visual_style": "Modern Minimal Corporate with Electric Accents"
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Outfit, sans-serif",
+      "weights": ["500", "700"],
+      "usage": "All section titles, hero text, and major callouts. DO NOT use Inter.",
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "Plus Jakarta Sans, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Paragraphs, UI labels, data tables.",
+      "letter_spacing": "tracking-normal"
+    },
+    "mono": {
+      "font_family": "JetBrains Mono, monospace",
+      "usage": "Code snippets, API keys, technical data."
+    },
+    "cdn_links": [
+      "https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "name": "Resona Indigo",
+      "hex": "#4338ca",
+      "tailwind": "indigo-700",
+      "usage": "Primary buttons, active states, key brand elements."
+    },
+    "secondary": {
+      "name": "Deep Slate",
+      "hex": "#0f172a",
+      "tailwind": "slate-900",
+      "usage": "Footer background, Admin sidebar, Dark mode backgrounds."
+    },
+    "accent": {
+      "name": "Electric Teal",
+      "hex": "#14b8a6",
+      "tailwind": "teal-500",
+      "usage": "Highlights, 'New' badges, success indicators, gradient stops."
+    },
+    "background": {
+      "light": "#ffffff",
+      "off_white": "#f8fafc",
+      "dark": "#020617"
+    },
+    "text": {
+      "primary": "#0f172a",
+      "secondary": "#475569",
+      "inverse": "#ffffff"
+    },
+    "gradients": {
+      "hero_glow": "bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-teal-500/20 blur-3xl",
+      "text_gradient": "bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-teal-600"
+    }
+  },
+  "layout": {
+    "spacing_system": {
+      "base": "4px",
+      "container_padding": "p-6 md:p-12 lg:p-24",
+      "section_gap": "gap-16 md:gap-32"
+    },
+    "grids": {
+      "marketing_tetris": {
+        "cols": "grid-cols-1 md:grid-cols-12",
+        "gap": "gap-8",
+        "rules": "Use asymmetry. Hero spans 8, secondary spans 4. Never fill 100% perfectly."
+      },
+      "admin_control_room": {
+        "cols": "grid-cols-1 md:grid-cols-4",
+        "gap": "gap-4",
+        "rules": "Dense packing. Widgets must stretch to fill height."
+      }
+    },
+    "containers": {
+      "max_width": "max-w-7xl mx-auto",
+      "glass_panel": "bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm"
+    }
+  },
+  "components": {
+    "public_site": {
+      "strategy": "Custom HTML + Tailwind. NO Shadcn Cards.",
+      "buttons": "Rounded-full px-8 py-4 font-medium transition-transform hover:scale-105 active:scale-95",
+      "cards": "Flat design, 1px border (slate-200), large padding (p-8), hover:border-indigo-500/50 transition-colors",
+      "nav": "Sticky glassmorphism header. Logo left, Links center, CTA right."
+    },
+    "admin_dashboard": {
+      "strategy": "Shadcn UI Components (Heavily Customized).",
+      "cards": "Rounded-xl border bg-card text-card-foreground shadow-sm",
+      "tables": "Dense, row-hover effects, sticky headers.",
+      "forms": "Shadcn Input/Select/Form. Labels must be clear and bold."
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "team_collaboration": "https://images.unsplash.com/photo-1760611656007-f767a8082758?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "office_meeting": "https://images.unsplash.com/photo-1758873268379-39301764793f?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "server_room": "https://images.unsplash.com/photo-1548544027-1a96c4c24c7a?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "coding_screen": "https://images.unsplash.com/photo-1637937459053-c788742455be?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "analytics_dashboard": "https://images.pexels.com/photos/6476585/pexels-photo-6476585.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 1.5px for elegance, 2px for UI controls."
+    }
+  },
+  "motion": {
+    "libraries": ["framer-motion", "lenis"],
+    "rules": {
+      "page_load": "Staggered fade-in-up for all sections.",
+      "hover": "Subtle lift (-4px) and shadow increase.",
+      "scroll": "Parallax on hero images. Smooth scroll via Lenis is MANDATORY."
+    }
+  },
+  "accessibility": {
+    "contrast": "Ensure 4.5:1 for normal text. Use APCA for large text.",
+    "focus_states": "Visible ring-2 ring-indigo-500 ring-offset-2.",
+    "aria": "All interactive elements must have aria-labels if no text is present."
+  },
+  "seo_requirements": {
+    "meta_tags": "Dynamic generation via Admin Panel.",
+    "json_ld": "Organization, Service, and Article schemas.",
+    "sitemap": "Auto-generated XML at /sitemap.xml",
+    "robots": "Editable via Admin Panel."
+  },
+  "universal_guidelines": [
+    "Do not use 'Inter' for headings.",
+    "Do not use generic centered layouts. Use asymmetry.",
+    "Do not use full-screen gradients. Use noise/texture.",
+    "Use 2-3x more spacing than typical designs.",
+    "All interactive elements must have data-testid attributes.",
+    "Use 'sonner' for toasts.",
+    "Use 'lucide-react' for icons."
+  ],
+  "instructions_to_main_agent": "1. Install 'lenis' and 'framer-motion' immediately. 2. Set up the font imports in index.css. 3. Build the Public Site using the 'Tetris' grid and Custom HTML. 4. Build the Admin Dashboard using Shadcn components but customize the radius and spacing to match the brand. 5. Ensure the SEO Super Admin features (JSON-LD, Robots.txt) are functional and editable."
+}
