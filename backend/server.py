@@ -219,7 +219,9 @@ async def create_seo_settings(seo_data: SEOSettingsCreate, admin: dict = Depends
 
 @api_router.put("/seo/{page}", response_model=SEOSettings)
 async def update_seo_settings(page: str, seo_data: SEOSettingsCreate, admin: dict = Depends(get_current_admin)):
-    seo = SEOSettings(page=page, **seo_data.model_dump())
+    data = seo_data.model_dump()
+    data['page'] = page
+    seo = SEOSettings(**data)
     doc = seo.model_dump()
     doc['updated_at'] = doc['updated_at'].isoformat()
     
