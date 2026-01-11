@@ -391,6 +391,77 @@ async def delete_blog(slug: str, admin: dict = Depends(get_current_admin)):
         raise HTTPException(status_code=404, detail="Blog not found")
     return {"message": "Blog deleted successfully"}
 
+@api_router.post("/contact/submit", response_model=ContactSubmission)
+async def submit_contact_form(contact_data: ContactSubmissionCreate):
+    """Handle contact form submission with email and Slack notifications"""
+    try:
+        # Create contact submission record
+        submission = ContactSubmission(**contact_data.model_dump())
+        doc = submission.model_dump()
+        doc['submitted_at'] = doc['submitted_at'].isoformat()
+        await db.contact_submissions.insert_one(doc)
+        
+        # Prepare email content
+        email_subject = f"New Contact Form Submission from {contact_data.name}"
+        email_body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <h2 style="color: #4F46E5;">New Contact Form Submission</h2>
+                <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <p><strong>Name:</strong> {contact_data.name}</p>
+                    <p><strong>Email:</strong> {contact_data.email}</p>
+                    <p><strong>Company:</strong> {contact_data.company or 'Not provided'}</p>
+                    <p><strong>Phone:</strong> {contact_data.phone or 'Not provided'}</p>
+                    <p><strong>Message:</strong></p>
+                    <p style="background-color: white; padding: 15px; border-radius: 5px; border-left: 4px solid #4F46E5;">
+                        {contact_data.message}
+                    </p>
+                </div>
+                <p style="color: #6b7280; font-size: 14px;">
+                    Submitted at: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
+                </p>
+            </body>
+        </html>
+        """
+        
+        # Send email notification
+        contact_email = os.environ.get("CONTACT_EMAIL", "info@techresona.com")
+        email_sent = await send_email(contact_email, email_subject, email_body)
+        
+        # Prepare Slack message
+        slack_message = f"""
+🆕 *New Contact Form Submission*
+
+*Name:* {contact_data.name}
+*Email:* {contact_data.email}
+*Company:* {contact_data.company or 'Not provided'}
+*Phone:* {contact_data.phone or 'Not provided'}
+
+*Message:*
+{contact_data.message}
+
+_Submitted at: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}_
+        """
+        
+        # Send Slack notification
+        slack_sent = await send_slack_notification(slack_message)
+        
+        logger.info(f"Contact form submitted - Email: {email_sent}, Slack: {slack_sent}")
+        
+        return submission
+    except Exception as e:
+        logger.error(f"Error processing contact form: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to process contact form submission")
+
+@api_router.get("/contact/submissions", response_model=List[ContactSubmission])
+async def get_contact_submissions(admin: dict = Depends(get_current_admin)):
+    """Get all contact form submissions (admin only)"""
+    submissions = await db.contact_submissions.find({}, {"_id": 0}).sort("submitted_at", -1).to_list(1000)
+    for sub in submissions:
+        if isinstance(sub.get('submitted_at'), str):
+            sub['submitted_at'] = datetime.fromisoformat(sub['submitted_at'])
+    return submissions
+
 @api_router.get("/keywords", response_model=List[Keyword])
 async def get_all_keywords(admin: dict = Depends(get_current_admin)):
     keywords = await db.keywords.find({}, {"_id": 0}).to_list(1000)
