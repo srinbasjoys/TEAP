@@ -11,10 +11,18 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center space-x-2" data-testid="logo-link">
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-700 to-teal-500 rounded-lg flex items-center justify-center">
+            <img 
+              src="/logo.png" 
+              alt="TechResona Logo" 
+              className="h-12 w-auto"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div className="w-10 h-10 bg-gradient-to-br from-indigo-700 to-teal-500 rounded-lg items-center justify-center hidden">
               <span className="text-white font-bold text-xl font-heading">TR</span>
             </div>
-            <span className="text-xl font-bold text-slate-900 font-heading">TechResona</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
