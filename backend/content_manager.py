@@ -44,28 +44,28 @@ SEO_SETTINGS = {
     },
     "about": {
         "page": "about",
-        "title": "About TechResona - Leading Cloud Solutions Provider in India",
+        "title": "About TechResona Pvt Ltd - Leading Cloud Solutions Provider in India",
         "description": "Learn about TechResona's mission to empower businesses with secure, scalable cloud solutions. Trusted partner for Azure, AWS, and managed services.",
         "keywords": "about techresona, cloud provider india, IT services company, azure partner, aws partner, microsoft azure consulting small business",
         "json_ld": None
     },
     "services": {
         "page": "services",
-        "title": "TechResona Services - Azure, AWS, Office 365, Power BI & Web Development",
+        "title": "TechResona Pvt Ltd Services - Azure, AWS, Office 365, Power BI & Web Development",
         "description": "Explore TechResona's comprehensive services: Azure Cloud, AWS Solutions, Office 365, Managed Services, Power BI, and Website Development for businesses.",
         "keywords": "azure cloud solutions for small business, aws cloud solutions for small business, office 365 licensing for small business, managed services india, small business website development, power bi consulting services",
         "json_ld": None
     },
     "contact": {
         "page": "contact",
-        "title": "Contact TechResona - Get Cloud Solutions for Your Business",
+        "title": "Contact TechResona Pvt Ltd - Get Cloud Solutions for Your Business",
         "description": "Get in touch with TechResona for Azure, AWS, Office 365, and managed services. Contact us for a free consultation on your cloud transformation needs.",
         "keywords": "contact techresona, cloud consultation, IT services inquiry, azure support, aws help",
         "json_ld": None
     },
     "blog": {
         "page": "blog",
-        "title": "TechResona Blog - Cloud Solutions, Azure, AWS & IT Services Insights",
+        "title": "TechResona Pvt Ltd Blog - Cloud Solutions, Azure, AWS & IT Services Insights",
         "description": "Read expert insights on Azure cloud solutions, AWS best practices, Office 365 licensing, and managed services for small businesses from TechResona's team.",
         "keywords": "azure cloud solutions for small business, aws cloud solutions, office 365 licensing, power bi consulting, managed services blog",
         "json_ld": None
