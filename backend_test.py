@@ -313,13 +313,13 @@ class TechResonaAPITester:
         """Test contact form submission API with email notifications"""
         print("\n📧 Testing Contact Form API...")
         
-        # Test contact form submission with valid data
+        # Test contact form submission with updated credentials (Phase 1 Final Test)
         contact_data = {
-            "name": "John Smith",
-            "email": "john.smith@example.com",
-            "company": "Tech Solutions Inc",
-            "phone": "+91 9876543210",
-            "message": "I am interested in your web development services. Please contact me to discuss a potential project."
+            "name": "Phase 1 Final Test",
+            "email": "test@techresona.com",
+            "company": "TechResona",
+            "phone": "+91 7517402788",
+            "message": "Testing email and Slack notifications after configuration update"
         }
         
         contact_success, contact_response = self.run_test(
