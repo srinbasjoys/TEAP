@@ -47,6 +47,7 @@ const ContactPage = () => {
         title={seoData?.title || "Contact TechResona - Get Cloud Solutions for Your Business"}
         description={seoData?.description || "Get in touch with TechResona for Azure, AWS, Office 365, and managed services. Contact us for a free consultation on your cloud transformation needs."}
         keywords={seoData?.keywords || "contact techresona, cloud consultation, IT services inquiry, azure support, aws help"}
+        canonical="https://techresona.com/contact"
         jsonLd={seoData?.json_ld}
       />
       <div className="min-h-screen">
