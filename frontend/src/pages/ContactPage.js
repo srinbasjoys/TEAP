@@ -16,6 +16,7 @@ const ContactPage = () => {
     name: '',
     email: '',
     company: '',
+    phone: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,11 +29,16 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      await axios.post(`${API}/contact/submit`, formData);
       toast.success('Message sent successfully! We\'ll get back to you soon.');
-      setFormData({ name: '', email: '', company: '', message: '' });
+      setFormData({ name: '', email: '', company: '', phone: '', message: '' });
+    } catch (error) {
+      toast.error('Failed to send message. Please try again or contact us directly.');
+      console.error('Form submission error:', error);
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
