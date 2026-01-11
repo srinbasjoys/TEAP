@@ -101,6 +101,7 @@ const BlogDetailPage = () => {
         description={blog.meta_description || blog.excerpt}
         keywords={blog.keywords}
         ogImage={blog.featured_image}
+        canonical={`https://techresona.com/blog/${blog.slug}`}
         jsonLd={jsonLd}
       />
       <div className="min-h-screen">
