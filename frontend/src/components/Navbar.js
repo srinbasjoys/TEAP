@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass-panel">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center space-x-2" data-testid="logo-link">
+          <Link to="/" className="flex items-center space-x-3" data-testid="logo-link">
             <img 
               src="/logo.png" 
               alt="TechResona Logo" 
@@ -22,6 +22,10 @@ const Navbar = () => {
             />
             <div className="w-10 h-10 bg-gradient-to-br from-indigo-700 to-teal-500 rounded-lg items-center justify-center hidden">
               <span className="text-white font-bold text-xl font-heading">TR</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-slate-900 font-heading leading-tight">TechResona</span>
+              <span className="text-xs text-slate-600 font-medium">Pvt Ltd</span>
             </div>
           </Link>
 
