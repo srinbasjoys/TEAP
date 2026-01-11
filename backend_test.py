@@ -412,8 +412,10 @@ def main():
     test_results = {
         'seo_endpoints': tester.test_seo_endpoints(),
         'public_endpoints': tester.test_public_endpoints(),
+        'contact_form_api': tester.test_contact_form_api(),
         'authentication': tester.test_authentication(),
         'admin_endpoints': tester.test_admin_endpoints(),
+        'contact_submissions_admin': tester.test_contact_submissions_admin(),
         'seo_management': tester.test_seo_management(),
         'blog_management': tester.test_blog_management(),
         'keyword_tracking': tester.test_keyword_tracking()
