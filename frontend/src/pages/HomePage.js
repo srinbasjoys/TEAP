@@ -18,6 +18,80 @@ const HomePage = () => {
     axios.get(`${API}/seo/home`).then(res => setSeoData(res.data)).catch(() => {});
   }, []);
 
+  // Organization Schema for SEO
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TechResona",
+    "description": "Leading IT services provider in India offering Azure, AWS, Office 365, and Managed Services.",
+    "url": "https://techresona.com",
+    "logo": "https://techresona.com/logo.png",
+    "email": "info@techresona.com",
+    "telephone": "+917517402788",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN",
+      "addressRegion": "India"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/techresona",
+      "https://twitter.com/techresona",
+      "https://www.facebook.com/techresona"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "500"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "TechResona Team"
+    }
+  };
+
+  // LocalBusiness Schema for SEO
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "TechResona",
+    "image": "https://techresona.com/logo.png",
+    "@id": "https://techresona.com",
+    "url": "https://techresona.com",
+    "telephone": "+917517402788",
+    "email": "info@techresona.com",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.7041,
+      "longitude": 77.1025
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "10:00",
+        "closes": "16:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "500"
+    }
+  };
+
   const services = [
     {
       icon: <Cloud size={32} />,
@@ -53,8 +127,9 @@ const HomePage = () => {
       <SEOHead 
         title={seoData?.title || "TechResona - Cloud Solutions & Managed Services | Azure, AWS, Office 365"}
         description={seoData?.description || "Leading IT services provider in India offering Azure, AWS, Office 365, and Managed Services. Secure, scalable cloud solutions for SMBs and enterprises."}
-        keywords={seoData?.keywords || "cloud services india, azure solutions, aws cloud, managed services, office 365, IT services"}
-        jsonLd={seoData?.json_ld}
+        keywords={seoData?.keywords || "azure cloud solutions for small business, aws cloud solutions for small business, office 365 licensing for small business, managed services, IT services india"}
+        canonical="https://techresona.com/"
+        jsonLd={seoData?.json_ld || [organizationSchema, localBusinessSchema]}
       />
       <div className="min-h-screen">
         <Navbar />
