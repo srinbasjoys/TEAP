@@ -22,7 +22,8 @@ const HomePage = () => {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "TechResona",
+    "name": "TechResona Pvt Ltd",
+    "alternateName": "TechResona",
     "description": "Leading IT services provider in India offering Azure, AWS, Office 365, and Managed Services.",
     "url": "https://techresona.com",
     "logo": "https://techresona.com/logo.png",
@@ -53,7 +54,8 @@ const HomePage = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "TechResona",
+    "name": "TechResona Pvt Ltd",
+    "alternateName": "TechResona",
     "image": "https://techresona.com/logo.png",
     "@id": "https://techresona.com",
     "url": "https://techresona.com",
