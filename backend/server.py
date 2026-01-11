@@ -236,7 +236,7 @@ async def update_seo_settings(page: str, seo_data: SEOSettingsCreate, admin: dic
 async def get_robots_txt():
     robots = await db.robots_txt.find_one({}, {"_id": 0}, sort=[("updated_at", -1)])
     if not robots:
-        default_content = "User-agent: *\nAllow: /\nSitemap: https://seo-llm-connect.preview.emergentagent.com/sitemap.xml"
+        default_content = "User-agent: *\nAllow: /\nSitemap: https://crawler-friendly-web.preview.emergentagent.com/sitemap.xml"
         return {"content": default_content}
     return {"content": robots['content']}
 
@@ -353,7 +353,7 @@ async def get_analytics(admin: dict = Depends(get_current_admin)):
 async def generate_sitemap():
     blogs = await db.blogs.find({"published": True}, {"_id": 0, "slug": 1, "updated_at": 1}).to_list(1000)
     
-    base_url = "https://seo-llm-connect.preview.emergentagent.com"
+    base_url = "https://crawler-friendly-web.preview.emergentagent.com"
     
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -415,14 +415,14 @@ async def shutdown_db_client():
 async def robots_txt():
     robots = await db.robots_txt.find_one({}, {"_id": 0}, sort=[("updated_at", -1)])
     if not robots:
-        return "User-agent: *\nAllow: /\nSitemap: https://seo-llm-connect.preview.emergentagent.com/sitemap.xml"
+        return "User-agent: *\nAllow: /\nSitemap: https://crawler-friendly-web.preview.emergentagent.com/sitemap.xml"
     return robots['content']
 
 @app.get("/sitemap.xml", response_class=Response)
 async def sitemap_xml():
     blogs = await db.blogs.find({"published": True}, {"_id": 0, "slug": 1, "updated_at": 1}).to_list(1000)
     
-    base_url = "https://seo-llm-connect.preview.emergentagent.com"
+    base_url = "https://crawler-friendly-web.preview.emergentagent.com"
     
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

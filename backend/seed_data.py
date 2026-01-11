@@ -123,8 +123,8 @@ async def seed_database():
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "name": "TechResona Pvt Ltd",
-                "url": "https://seo-llm-connect.preview.emergentagent.com",
-                "logo": "https://seo-llm-connect.preview.emergentagent.com/logo.png",
+                "url": "https://crawler-friendly-web.preview.emergentagent.com",
+                "logo": "https://crawler-friendly-web.preview.emergentagent.com/logo.png",
                 "description": "Leading cloud solutions and IT services provider in India",
                 "address": {
                     "@type": "PostalAddress",
@@ -150,7 +150,7 @@ async def seed_database():
     
     default_robots = {
         "id": "robots-001",
-        "content": "User-agent: *\\nAllow: /\\nDisallow: /admin\\n\\nSitemap: https://seo-llm-connect.preview.emergentagent.com/sitemap.xml",
+        "content": "User-agent: *\\nAllow: /\\nDisallow: /admin\\n\\nSitemap: https://crawler-friendly-web.preview.emergentagent.com/sitemap.xml",
         "updated_at": datetime.now(timezone.utc).isoformat()
     }
     
