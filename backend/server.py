@@ -464,6 +464,60 @@ async def get_contact_submissions(admin: dict = Depends(get_current_admin)):
             sub['submitted_at'] = datetime.fromisoformat(sub['submitted_at'])
     return submissions
 
+@api_router.post("/logo/upload")
+async def upload_logo(file: UploadFile = File(...), admin: dict = Depends(get_current_admin)):
+    """Upload a new logo (admin only)"""
+    try:
+        # Validate file type
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+        
+        # Define frontend public directory
+        frontend_public_dir = Path(__file__).parent.parent / "frontend" / "public"
+        frontend_public_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save as logo.png
+        logo_path = frontend_public_dir / "logo.png"
+        
+        # Save the file
+        with open(logo_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Save logo info to database
+        logo_doc = {
+            "id": str(uuid.uuid4()),
+            "filename": file.filename,
+            "uploaded_by": admin.get("email"),
+            "uploaded_at": datetime.now(timezone.utc).isoformat(),
+            "path": "/logo.png"
+        }
+        await db.logos.insert_one(logo_doc)
+        
+        logger.info(f"Logo uploaded by {admin.get('email')}: {file.filename}")
+        
+        return {
+            "message": "Logo uploaded successfully",
+            "path": "/logo.png",
+            "filename": file.filename
+        }
+    except Exception as e:
+        logger.error(f"Error uploading logo: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to upload logo")
+
+@api_router.get("/logo/current")
+async def get_current_logo():
+    """Get current logo information"""
+    logo = await db.logos.find_one({}, {"_id": 0}, sort=[("uploaded_at", -1)])
+    if logo:
+        return logo
+    return {"path": "/logo.png", "filename": "logo.png"}
+
+@api_router.get("/logo/history")
+async def get_logo_history(admin: dict = Depends(get_current_admin)):
+    """Get logo upload history (admin only)"""
+    logos = await db.logos.find({}, {"_id": 0}).sort("uploaded_at", -1).to_list(100)
+    return logos
+
 @api_router.get("/keywords", response_model=List[Keyword])
 async def get_all_keywords(admin: dict = Depends(get_current_admin)):
     keywords = await db.keywords.find({}, {"_id": 0}).to_list(1000)
