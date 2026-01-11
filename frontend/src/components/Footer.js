@@ -8,12 +8,24 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-700 to-teal-500 rounded-lg flex items-center justify-center">
+            <Link to="/" className="flex items-center space-x-3 mb-6">
+              <img 
+                src="/logo.png" 
+                alt="TechResona Logo" 
+                className="h-12 w-auto"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-700 to-teal-500 rounded-lg items-center justify-center hidden">
                 <span className="text-white font-bold text-xl font-heading">TR</span>
               </div>
-              <span className="text-xl font-bold font-heading">TechResona</span>
-            </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold font-heading leading-tight">TechResona</span>
+                <span className="text-xs text-slate-400 font-medium">Pvt Ltd</span>
+              </div>
+            </Link>
             <p className="text-slate-400 text-sm mb-6">
               Empowering businesses with secure and scalable cloud solutions. Your trusted partner for digital transformation.
             </p>
