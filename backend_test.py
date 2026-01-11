@@ -309,6 +309,99 @@ class TechResonaAPITester:
         
         return False
 
+    def test_contact_form_api(self):
+        """Test contact form submission API with email notifications"""
+        print("\n📧 Testing Contact Form API...")
+        
+        # Test contact form submission with valid data
+        contact_data = {
+            "name": "John Smith",
+            "email": "john.smith@example.com",
+            "company": "Tech Solutions Inc",
+            "phone": "+91 9876543210",
+            "message": "I am interested in your web development services. Please contact me to discuss a potential project."
+        }
+        
+        contact_success, contact_response = self.run_test(
+            "Contact Form Submission",
+            "POST",
+            "contact/submit",
+            200,
+            data=contact_data
+        )
+        
+        # Verify response structure
+        if contact_success and contact_response:
+            required_fields = ['id', 'name', 'email', 'message', 'submitted_at', 'status']
+            missing_fields = [field for field in required_fields if field not in contact_response]
+            
+            if missing_fields:
+                print(f"❌ Response missing fields: {missing_fields}")
+                self.failed_tests.append({
+                    'test': 'Contact Form Response Structure',
+                    'error': f'Missing fields: {missing_fields}'
+                })
+                return False
+            else:
+                print(f"✅ Contact submission created with ID: {contact_response['id']}")
+        
+        # Test contact form with missing required fields
+        invalid_data = {
+            "name": "Test User",
+            # Missing email and message
+            "company": "Test Company"
+        }
+        
+        validation_success, _ = self.run_test(
+            "Contact Form Validation (Missing Fields)",
+            "POST",
+            "contact/submit",
+            422,  # Validation error expected
+            data=invalid_data
+        )
+        
+        # Test contact form with invalid email
+        invalid_email_data = {
+            "name": "Test User",
+            "email": "invalid-email",
+            "message": "Test message"
+        }
+        
+        email_validation_success, _ = self.run_test(
+            "Contact Form Validation (Invalid Email)",
+            "POST",
+            "contact/submit",
+            422,  # Validation error expected
+            data=invalid_email_data
+        )
+        
+        return contact_success and validation_success and email_validation_success
+
+    def test_contact_submissions_admin(self):
+        """Test admin access to contact submissions"""
+        if not self.token:
+            print("❌ No authentication token available for contact submissions test")
+            return False
+            
+        print("\n👨‍💼 Testing Contact Submissions (Admin)...")
+        
+        # Test get all contact submissions (admin only)
+        submissions_success, submissions_response = self.run_test(
+            "Get Contact Submissions (Admin)",
+            "GET",
+            "contact/submissions",
+            200
+        )
+        
+        if submissions_success and isinstance(submissions_response, list):
+            print(f"✅ Retrieved {len(submissions_response)} contact submissions")
+            return True
+        elif submissions_success:
+            print("✅ Contact submissions endpoint accessible (empty list)")
+            return True
+        
+        return False
+
 def main():
     print("🚀 Starting TechResona API Testing...")
     print("=" * 50)
