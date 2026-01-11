@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LayoutDashboard, Search, Settings, FileText, TrendingUp, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Search, Settings, FileText, TrendingUp, LogOut, Menu, X, Image } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
 
