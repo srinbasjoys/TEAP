@@ -567,30 +567,40 @@ async def shutdown_db_client():
 async def robots_txt():
     robots = await db.robots_txt.find_one({}, {"_id": 0}, sort=[("updated_at", -1)])
     if not robots:
-        return "User-agent: *\nAllow: /\nSitemap: https://crawler-friendly-web.preview.emergentagent.com/sitemap.xml"
+        default_content = """User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://techresona.com/sitemap.xml"""
+        return default_content
     return robots['content']
 
 @app.get("/sitemap.xml", response_class=Response)
 async def sitemap_xml():
     blogs = await db.blogs.find({"published": True}, {"_id": 0, "slug": 1, "updated_at": 1}).to_list(1000)
     
-    base_url = "https://crawler-friendly-web.preview.emergentagent.com"
+    base_url = "https://techresona.com"
     
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     
     static_pages = [
-        {"loc": "/", "priority": "1.0"},
-        {"loc": "/about", "priority": "0.8"},
-        {"loc": "/services", "priority": "0.9"},
-        {"loc": "/contact", "priority": "0.7"},
-        {"loc": "/blog", "priority": "0.8"},
+        {"loc": "/", "priority": "1.0", "changefreq": "weekly"},
+        {"loc": "/about", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/services", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": "/contact", "priority": "0.7", "changefreq": "monthly"},
+        {"loc": "/blog", "priority": "0.8", "changefreq": "daily"},
     ]
     
     for page in static_pages:
         sitemap += f'  <url>\n'
         sitemap += f'    <loc>{base_url}{page["loc"]}</loc>\n'
-        sitemap += f'    <changefreq>weekly</changefreq>\n'
+        sitemap += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
         sitemap += f'    <priority>{page["priority"]}</priority>\n'
         sitemap += f'  </url>\n'
     
@@ -610,4 +620,4 @@ async def sitemap_xml():
     
     sitemap += '</urlset>'
     
-    return Response(content=sitemap, media_type="application/xml")
+    return Response(content=sitemap, media_type="application/xml", headers={"Content-Type": "application/xml"})
