@@ -296,6 +296,258 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Cloud Solutions Benefits Section */}
+        <section className="section-padding bg-white" data-testid="benefits-section">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 font-heading">
+                Azure & AWS Cloud Solutions Built for Small Businesses
+              </h2>
+              <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+                Enterprise-grade cloud infrastructure without enterprise complexity. TechResona specializes in Azure cloud solutions for small business and AWS implementations that scale with your growth.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <TrendingUp size={32} />,
+                  title: "40-60% Cost Savings",
+                  description: "Our Azure managed services and AWS optimization expertise helps small businesses save thousands annually on cloud costs.",
+                  highlight: "Average ROI: 300%"
+                },
+                {
+                  icon: <Shield size={32} />,
+                  title: "Enterprise Security",
+                  description: "Bank-level security for your business data. Complete compliance support for GDPR, HIPAA, and industry regulations.",
+                  highlight: "99.9% Uptime SLA"
+                },
+                {
+                  icon: <Zap size={32} />,
+                  title: "Rapid Deployment",
+                  description: "Zero-downtime cloud migrations in 4-8 weeks. Expert Azure cloud migration services for startups and SMBs.",
+                  highlight: "Average: 6 weeks"
+                }
+              ].map((benefit, idx) => (
+                <motion.div
+                  key={idx}
+                  className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-200 hover:border-indigo-500/50 hover:shadow-xl transition-all"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <div className="text-indigo-700 mb-4">{benefit.icon}</div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3 font-heading">{benefit.title}</h3>
+                  <p className="text-slate-600 mb-4">{benefit.description}</p>
+                  <div className="inline-block px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold">
+                    {benefit.highlight}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Success Stories Section */}
+        <section className="section-padding bg-slate-50" data-testid="success-stories-section">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 font-heading">
+                Small Businesses Trust TechResona
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Real results from real businesses using our managed services and cloud solutions
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  company: "RetailTech Solutions",
+                  industry: "Retail",
+                  employees: "75 employees",
+                  result: "55% IT Cost Reduction",
+                  quote: "TechResona's Azure cloud solutions transformed our operations. We went from constant server issues to 99.98% uptime.",
+                  metrics: ["6-week migration", "Zero downtime", "24/7 monitoring"]
+                },
+                {
+                  company: "FinServe Group",
+                  industry: "Financial Services",
+                  employees: "50 employees",
+                  result: "300% ROI in Year 1",
+                  quote: "Their Office 365 licensing expertise and managed services saved us $120K annually while improving security and compliance.",
+                  metrics: ["SOC 2 Compliant", "Advanced security", "Cost optimized"]
+                }
+              ].map((story, idx) => (
+                <motion.div
+                  key={idx}
+                  className="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-all"
+                  initial={{ opacity: 0, x: idx === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.2 }}
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900 font-heading">{story.company}</h3>
+                      <p className="text-slate-600">{story.industry} • {story.employees}</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold text-teal-600 font-heading">{story.result}</div>
+                    </div>
+                  </div>
+                  
+                  <blockquote className="text-slate-700 italic mb-6 text-lg">
+                    "{story.quote}"
+                  </blockquote>
+
+                  <div className="flex flex-wrap gap-2">
+                    {story.metrics.map((metric, metricIdx) => (
+                      <span 
+                        key={metricIdx}
+                        className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium"
+                      >
+                        ✓ {metric}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              className="mt-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-slate-600 mb-4">Join 500+ businesses that trust TechResona</p>
+              <button
+                onClick={() => navigate('/contact')}
+                className="bg-indigo-700 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-indigo-800 hover:scale-105 active:scale-95 transition-all inline-flex items-center space-x-2"
+              >
+                <span>Get Your Free Cloud Assessment</span>
+                <ArrowRight size={20} />
+              </button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Industries & Solutions Section */}
+        <section className="section-padding bg-white" data-testid="industries-section">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 font-heading">
+                Specialized Solutions by Industry
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Industry-specific cloud solutions and managed services tailored for your business needs
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  icon: "🏥",
+                  industry: "Healthcare",
+                  solutions: ["HIPAA Compliant Cloud", "Secure Patient Data", "Telehealth Solutions"]
+                },
+                {
+                  icon: "🏦",
+                  industry: "Finance",
+                  solutions: ["SOC 2 Compliance", "Data Encryption", "Disaster Recovery"]
+                },
+                {
+                  icon: "🛒",
+                  industry: "Retail & E-commerce",
+                  solutions: ["Scalable Infrastructure", "POS Integration", "Inventory Management"]
+                },
+                {
+                  icon: "⚖️",
+                  industry: "Legal",
+                  solutions: ["Secure Document Storage", "Client Portals", "Matter Management"]
+                },
+                {
+                  icon: "🏗️",
+                  industry: "Construction",
+                  solutions: ["Project Management", "Mobile Access", "Field Collaboration"]
+                },
+                {
+                  icon: "🎓",
+                  industry: "Education",
+                  solutions: ["Learning Management", "Student Data Security", "Remote Learning"]
+                },
+                {
+                  icon: "🏭",
+                  industry: "Manufacturing",
+                  solutions: ["Supply Chain Visibility", "IoT Integration", "Production Tracking"]
+                },
+                {
+                  icon: "📱",
+                  industry: "Technology",
+                  solutions: ["DevOps Pipeline", "CI/CD Automation", "Multi-Cloud Strategy"]
+                }
+              ].map((industry, idx) => (
+                <motion.div
+                  key={idx}
+                  className="bg-gradient-to-br from-slate-50 to-white p-6 rounded-xl border border-slate-200 hover:border-indigo-500/50 hover:shadow-lg transition-all"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                >
+                  <div className="text-4xl mb-3">{industry.icon}</div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 font-heading">{industry.industry}</h3>
+                  <ul className="space-y-2">
+                    {industry.solutions.map((solution, sIdx) => (
+                      <li key={sIdx} className="text-sm text-slate-600 flex items-start">
+                        <span className="text-teal-600 mr-2">✓</span>
+                        <span>{solution}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              className="mt-12 bg-gradient-to-r from-indigo-50 to-teal-50 p-8 rounded-2xl text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold text-slate-900 mb-3 font-heading">
+                Don't See Your Industry?
+              </h3>
+              <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
+                We work with businesses across all sectors. Our Azure, AWS, and Office 365 solutions can be customized for any industry.
+              </p>
+              <button
+                onClick={() => navigate('/services')}
+                className="bg-indigo-700 text-white px-8 py-3 rounded-full font-medium hover:bg-indigo-800 hover:scale-105 active:scale-95 transition-all"
+              >
+                Explore All Services
+              </button>
+            </motion.div>
+          </div>
+        </section>
+
         <section className="section-padding bg-gradient-to-br from-indigo-700 to-indigo-900 text-white" data-testid="cta-section">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl sm:text-5xl font-bold mb-6 font-heading" data-testid="cta-heading">
