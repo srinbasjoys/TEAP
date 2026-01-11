@@ -171,6 +171,64 @@ def create_access_token(data: dict):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
+async def send_email(to_email: str, subject: str, body: str):
+    """Send email using SMTP"""
+    try:
+        smtp_host = os.environ.get("SMTP_HOST", "smtp.gmail.com")
+        smtp_port = int(os.environ.get("SMTP_PORT", "587"))
+        smtp_user = os.environ.get("SMTP_USER")
+        smtp_password = os.environ.get("SMTP_PASSWORD")
+        
+        message = MIMEMultipart("alternative")
+        message["From"] = smtp_user
+        message["To"] = to_email
+        message["Subject"] = subject
+        
+        html_part = MIMEText(body, "html")
+        message.attach(html_part)
+        
+        await aiosmtplib.send(
+            message,
+            hostname=smtp_host,
+            port=smtp_port,
+            username=smtp_user,
+            password=smtp_password,
+            start_tls=True,
+        )
+        logger.info(f"Email sent successfully to {to_email}")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to send email: {str(e)}")
+        return False
+
+async def send_slack_notification(message: str):
+    """Send notification to Slack using webhook"""
+    try:
+        webhook_url = os.environ.get("SLACK_WEBHOOK_URL")
+        
+        # If webhook URL is not set or is placeholder, skip Slack notification
+        if not webhook_url or "YOUR_WEBHOOK_URL" in webhook_url:
+            logger.warning("Slack webhook URL not configured, skipping Slack notification")
+            return False
+            
+        payload = {
+            "text": message,
+            "username": "TechResona Contact Form",
+            "icon_emoji": ":email:"
+        }
+        
+        async with aiohttp.ClientSession() as session:
+            async with session.post(webhook_url, json=payload) as response:
+                if response.status == 200:
+                    logger.info("Slack notification sent successfully")
+                    return True
+                else:
+                    logger.error(f"Slack notification failed with status {response.status}")
+                    return False
+    except Exception as e:
+        logger.error(f"Failed to send Slack notification: {str(e)}")
+        return False
+
 async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(security)):
     token = credentials.credentials
     try:
