@@ -45,9 +45,12 @@ const BlogListPage = () => {
   return (
     <>
       <SEOHead 
-        title={seoData?.title || "TechResona Blog - Cloud Solutions, SEO & Web Development Insights"}
-        description={seoData?.description || "Read expert insights on cloud migration, Azure, AWS, SEO optimization, and web development trends from TechResona's team of specialists."}
-        keywords={seoData?.keywords || "cloud blog, azure tips, aws best practices, seo guides, web development blog, tech insights"}
+        title={seoData?.title || "TechResona Blog - Cloud Solutions, Azure, AWS & IT Services Insights"}
+        description={seoData?.description || "Read expert insights on Azure cloud solutions, AWS best practices, Office 365 licensing, and managed services for small businesses from TechResona's team."}
+        keywords={seoData?.keywords || "azure cloud solutions for small business, aws cloud solutions, office 365 licensing, power bi consulting, managed services blog"}
+        canonical="https://techresona.com/blog"
+        jsonLd={seoData?.json_ld}
+      />
         jsonLd={seoData?.json_ld}
       />
       <div className="min-h-screen">
