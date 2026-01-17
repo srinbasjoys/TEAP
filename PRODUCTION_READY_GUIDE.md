@@ -190,7 +190,7 @@ sudo /app/deploy_production.sh
 ### Environment Variables
 ```bash
 # Frontend (.env)
-REACT_APP_BACKEND_URL=https://deploy-ready-87.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://perfoptimize-1.preview.emergentagent.com
 
 # Backend (.env)
 MONGO_URL="mongodb://localhost:27017"

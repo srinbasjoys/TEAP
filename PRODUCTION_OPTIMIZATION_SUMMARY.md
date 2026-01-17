@@ -195,7 +195,7 @@ npx serve -s build -l 3000
 ## 📝 Notes
 
 - Backend runs on **port 9001** locally (internal only)
-- External URL remains: `https://deploy-ready-87.preview.emergentagent.com`
+- External URL remains: `https://perfoptimize-1.preview.emergentagent.com`
 - Service Worker only activates in production builds
 - Font loading optimized with `font-display: swap`
 - All optimizations are production-only (development experience unchanged)
