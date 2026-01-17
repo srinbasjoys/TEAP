@@ -268,11 +268,14 @@ const HomePage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
               <div className="md:col-span-5">
-                <img 
-                  src="https://images.unsplash.com/photo-1760611656007-f767a8082758?crop=entropy&cs=srgb&fm=jpg&q=85" 
-                  alt="Team Collaboration" 
+                <OptimizedImage
+                  src="https://images.unsplash.com/photo-1760611656007-f767a8082758"
+                  alt="Team Collaboration"
                   className="rounded-2xl shadow-xl"
-                  data-testid="why-choose-image"
+                  testId="why-choose-image"
+                  width={550}
+                  height={310}
+                  lazy={true}
                 />
               </div>
               <div className="md:col-span-7">
