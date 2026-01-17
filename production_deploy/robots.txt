@@ -1,0 +1,22 @@
+# robots.txt for TechResona
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://perfoptimize-1.preview.emergentagent.com/sitemap.xml
+
+# Disallow admin and private areas
+User-agent: *
+Disallow: /admin
+Disallow: /api
+
+# Allow specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl-delay for politeness
+User-agent: *
+Crawl-delay: 1

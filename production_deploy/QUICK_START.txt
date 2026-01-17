@@ -1,0 +1,47 @@
+╔════════════════════════════════════════════════════════════╗
+║           TechResona Production Deployment                 ║
+║                    Quick Start Guide                       ║
+╚════════════════════════════════════════════════════════════╝
+
+WHAT'S IN THIS PACKAGE:
+├── Frontend (static files) → Deploy to web root
+├── backend/ → Backend API files
+├── nginx.conf.example → Nginx configuration
+├── DEPLOY_README.md → Full deployment guide
+└── QUICK_START.txt → This file
+
+BACKEND CONFIGURATION:
+→ Port: 9001 (localhost only - NOT exposed externally)
+→ Access: http://127.0.0.1:9001
+→ Workers: 2
+
+FRONTEND CONFIGURATION:
+→ Backend URL: https://techresona.com/api
+→ All API calls proxied through Nginx
+
+DEPLOYMENT CHECKLIST:
+☐ Upload frontend files to /var/www/techresona/public/
+☐ Upload backend files to /var/www/techresona/backend/
+☐ Install Python dependencies (requirements.txt)
+☐ Configure .env file with your credentials
+☐ Install systemd service
+☐ Configure Nginx with provided config
+☐ Enable SSL certificate
+☐ Test backend: curl http://127.0.0.1:9001/health
+☐ Test frontend: Visit https://techresona.com
+☐ Run PageSpeed test
+
+EXPECTED PERFORMANCE:
+→ Mobile Score: 85-95
+→ Desktop Score: 95-100
+→ LCP: < 2.5s
+→ FID: < 100ms
+→ CLS: < 0.1
+
+SUPPORT FILES:
+→ Full guide: DEPLOY_README.md
+→ Nginx config: nginx.conf.example
+→ Systemd service: backend/techresona-backend.service
+→ Environment template: backend/.env.template
+
+For detailed instructions, see DEPLOY_README.md
