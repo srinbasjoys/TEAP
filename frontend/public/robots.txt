@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://deploy-ready-87.preview.emergentagent.com/sitemap.xml
+Sitemap: https://render-fix-8.preview.emergentagent.com/sitemap.xml
 
 # Disallow admin and private areas
 User-agent: *
