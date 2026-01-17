@@ -106,6 +106,19 @@ user_problem_statement: |
   Create production-ready TechResona website with full SEO optimization, contact form with email and Slack notifications,
   5 comprehensive blogs focused on target keywords, mobile responsiveness, and optimal performance scores.
   Backend should run on port 9010 for production deployment.
+  
+  LATEST UPDATE (Jan 17, 2025):
+  Performance optimization for production site (techresona.com):
+  - Resolve sitemap.xml loading issue (backend on port 9001)
+  - Fix render blocking resources (Est savings: 720-1050ms)
+  - Optimize cache lifetimes (Est savings: 103-105 KiB)
+  - Image optimization (Est savings: 36+ KiB per image)
+  - Add preconnect hints for external resources
+  - Reduce unused JavaScript (Est savings: 90.7 KiB)
+  - Reduce unused CSS (Est savings: 12.4 KiB)
+  - CSS minification (Est savings: 2.9 KiB)
+  - Improve LCP (reduce element render delay from 3,310-3,630ms)
+  Target: Lighthouse scores 85+ mobile, 90+ desktop
 
 backend:
   - task: "Contact Form API with Email & Slack Notifications"
