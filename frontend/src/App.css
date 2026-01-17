@@ -1,6 +1,8 @@
 .App {
   min-height: 100vh;
   width: 100%;
+  /* Performance optimization: contain layout recalculations */
+  contain: layout style paint;
 }
 
 * {
@@ -10,17 +12,37 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Disable default smooth scroll as Lenis handles it */
+  scroll-behavior: auto;
 }
 
+/* Performance optimizations for common animated elements */
 .hero-section {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  /* Optimize for animations */
+  contain: layout style;
+  will-change: contents;
+}
+
+/* Add GPU acceleration for transforms */
+.motion-element {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize images for rendering */
+img, picture {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
 }
 
 .section-padding {
   padding: 6rem 1.5rem;
+  /* Contain layout changes to section */
+  contain: layout;
 }
 
 @media (min-width: 768px) {
@@ -32,5 +54,16 @@ html {
 @media (min-width: 1024px) {
   .section-padding {
     padding: 10rem 6rem;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
