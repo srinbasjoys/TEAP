@@ -119,13 +119,14 @@ function App() {
               <ProtectedRoute>
                 <KeywordTracker />
               </ProtectedRoute>
-          } />
-          <Route path="/admin/logo" element={
-            <ProtectedRoute>
-              <LogoManager />
-            </ProtectedRoute>
-          } />
-        </Routes>
+            } />
+            <Route path="/admin/logo" element={
+              <ProtectedRoute>
+                <LogoManager />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
       <Toaster position="top-right" richColors />
     </div>
