@@ -90,34 +90,35 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/blog" element={<BlogListPage />} />
-          <Route path="/blog/:slug" element={<BlogDetailPage />} />
-          
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/seo" element={
-            <ProtectedRoute>
-              <SEOManager />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/blogs" element={
-            <ProtectedRoute>
-              <BlogManager />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/keywords" element={
-            <ProtectedRoute>
-              <KeywordTracker />
-            </ProtectedRoute>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/blog" element={<BlogListPage />} />
+            <Route path="/blog/:slug" element={<BlogDetailPage />} />
+            
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/seo" element={
+              <ProtectedRoute>
+                <SEOManager />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blogs" element={
+              <ProtectedRoute>
+                <BlogManager />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/keywords" element={
+              <ProtectedRoute>
+                <KeywordTracker />
+              </ProtectedRoute>
           } />
           <Route path="/admin/logo" element={
             <ProtectedRoute>
