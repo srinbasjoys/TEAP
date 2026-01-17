@@ -1,0 +1,17 @@
+{
+  "short_name": "TechResona",
+  "name": "TechResona - Cloud Solutions for Small Business",
+  "description": "Your trusted partner for Azure, AWS, Office 365, and Managed IT Services",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#4338ca",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary"
+}
