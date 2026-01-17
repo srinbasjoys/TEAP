@@ -1,22 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import './App.css';
 import { Toaster } from './components/ui/sonner';
 
+// Eager load critical pages for better initial render
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import ContactPage from './pages/ContactPage';
-import BlogListPage from './pages/BlogListPage';
-import BlogDetailPage from './pages/BlogDetailPage';
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import SEOManager from './pages/admin/SEOManager';
-import BlogManager from './pages/admin/BlogManager';
-import KeywordTracker from './pages/admin/KeywordTracker';
-import LogoManager from './pages/admin/LogoManager';
+
+// Lazy load non-critical pages for code splitting
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const BlogListPage = lazy(() => import('./pages/BlogListPage'));
+const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage'));
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const SEOManager = lazy(() => import('./pages/admin/SEOManager'));
+const BlogManager = lazy(() => import('./pages/admin/BlogManager'));
+const KeywordTracker = lazy(() => import('./pages/admin/KeywordTracker'));
+const LogoManager = lazy(() => import('./pages/admin/LogoManager'));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100vh',
+    background: 'linear-gradient(to bottom, #0f172a, #1e293b)',
+  }}>
+    <div style={{
+      width: '48px',
+      height: '48px',
+      border: '4px solid rgba(79, 70, 229, 0.2)',
+      borderTop: '4px solid #4f46e5',
+      borderRadius: '50%',
+      animation: 'spin 1s linear infinite',
+    }} />
+    <style>{`
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `}</style>
+  </div>
+);
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('techresona_admin_token');
