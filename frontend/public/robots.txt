@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Sitemap: https://techresona.com/sitemap.xml
+
+# Disallow admin pages
+User-agent: *
+Disallow: /admin/
+
+# Crawl delay
+Crawl-delay: 1
