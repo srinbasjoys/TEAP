@@ -61,6 +61,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:prod": "CRACO_CONFIG_PATH=./craco.config.production.js craco build",
+    "build:analyze": "ANALYZE=true CRACO_CONFIG_PATH=./craco.config.production.js craco build",
     "test": "craco test"
   },
   "browserslist": {
