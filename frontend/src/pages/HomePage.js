@@ -183,10 +183,16 @@ const HomePage = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6?crop=entropy&cs=srgb&fm=jpg&q=85" 
+                  src="https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6?w=900&h=600&fit=crop&fm=webp&q=75" 
+                  srcSet="https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6?w=600&h=400&fit=crop&fm=webp&q=75 600w,
+                          https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6?w=900&h=600&fit=crop&fm=webp&q=75 900w"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   alt="Cloud Technology" 
                   className="rounded-2xl shadow-2xl"
+                  loading="eager"
                   data-testid="hero-image"
+                  width="600"
+                  height="400"
                 />
               </motion.div>
             </div>
