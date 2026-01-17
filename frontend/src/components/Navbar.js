@@ -12,15 +12,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center space-x-3" data-testid="logo-link">
-            <img 
-              src="/logo.png" 
-              alt="TechResona Logo" 
-              className="h-12 w-auto"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
-            />
+            <OptimizedLogo className="h-12 w-auto" alt="TechResona Logo" />
             <div className="w-10 h-10 bg-gradient-to-br from-indigo-700 to-teal-500 rounded-lg items-center justify-center hidden">
               <span className="text-white font-bold text-xl font-heading">TR</span>
             </div>
