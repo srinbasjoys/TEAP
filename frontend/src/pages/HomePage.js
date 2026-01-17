@@ -39,7 +39,15 @@ const HomePage = () => {
   }), [shouldReduceMotion]);
 
   useEffect(() => {
-    axios.get(`${API}/seo/home`).then(res => setSeoData(res.data)).catch(() => {});
+    // Optional SEO data fetch - gracefully handle failures
+    if (BACKEND_URL && API) {
+      axios.get(`${API}/seo/home`)
+        .then(res => setSeoData(res.data))
+        .catch(err => {
+          // Silently fail - use default SEO data
+          console.debug('SEO data fetch failed, using defaults');
+        });
+    }
   }, []);
 
   // Organization Schema for SEO

@@ -41,6 +41,8 @@ const Navbar = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-slate-900"
             data-testid="mobile-menu-toggle"
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
