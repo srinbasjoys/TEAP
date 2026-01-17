@@ -30,24 +30,35 @@ const OptimizedImage = ({
     // Default sizes if not provided
     const defaultWidth = width || 800;
     
+    // Optimize based on actual expected display sizes
+    // For hero image: mobile ~400px, tablet ~500px, desktop ~500px
+    const sizes = width > 500 
+      ? '(max-width: 640px) 400px, (max-width: 1024px) 500px, 500px'
+      : `(max-width: 640px) ${Math.round(defaultWidth * 0.5)}px, ${defaultWidth}px`;
+    
+    // Generate appropriate srcset based on actual display sizes
+    const smallWidth = Math.round(defaultWidth * 0.5);
+    const mediumWidth = Math.round(defaultWidth * 0.85);
+    
     return (
       <picture>
         {/* WebP sources for different screen sizes */}
         <source
           type="image/webp"
           srcSet={`
-            ${createUnsplashUrl(defaultWidth * 0.5)} ${defaultWidth * 0.5}w,
-            ${createUnsplashUrl(defaultWidth)} ${defaultWidth}w,
-            ${createUnsplashUrl(defaultWidth * 1.5)} ${defaultWidth * 1.5}w
+            ${createUnsplashUrl(smallWidth, 80)} ${smallWidth}w,
+            ${createUnsplashUrl(mediumWidth, 75)} ${mediumWidth}w,
+            ${createUnsplashUrl(defaultWidth, 75)} ${defaultWidth}w
           `}
-          sizes={`(max-width: 768px) ${defaultWidth * 0.5}px, (max-width: 1024px) ${defaultWidth}px, ${defaultWidth * 1.5}px`}
+          sizes={sizes}
         />
         {/* Fallback */}
         <img
-          src={createUnsplashUrl(defaultWidth)}
+          src={createUnsplashUrl(mediumWidth, 75)}
           alt={alt}
           className={className}
           loading={!priority && lazy ? 'lazy' : 'eager'}
+          fetchpriority={priority ? 'high' : 'auto'}
           data-testid={testId}
           width={width}
           height={height}
