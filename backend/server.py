@@ -319,7 +319,7 @@ async def update_seo_settings(page: str, seo_data: SEOSettingsCreate, admin: dic
 async def get_robots_txt():
     robots = await db.robots_txt.find_one({}, {"_id": 0}, sort=[("updated_at", -1)])
     if not robots:
-        default_content = "User-agent: *\nAllow: /\nSitemap: https://cacheboost-2.preview.emergentagent.com/sitemap.xml"
+        default_content = "User-agent: *\nAllow: /\nSitemap: https://prod-backend-sync.preview.emergentagent.com/sitemap.xml"
         return {"content": default_content}
     return {"content": robots['content']}
 
