@@ -318,8 +318,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Contact Form API with Email & Slack Notifications"
-    - "Contact Page with Form Submission"
+    - "Image Optimization & Performance"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
