@@ -2,8 +2,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const SEOHead = ({ title, description, keywords, ogImage, jsonLd, canonical }) => {
-  // Default canonical URL if not provided
-  const canonicalUrl = canonical || (typeof window !== 'undefined' ? window.location.href : '');
+  // Default canonical URL if not provided, ensure HTTPS
+  let canonicalUrl = canonical || (typeof window !== 'undefined' ? window.location.href : '');
+  
+  // Force HTTPS protocol for all canonical URLs
+  if (canonicalUrl && !canonicalUrl.startsWith('https://')) {
+    canonicalUrl = canonicalUrl.replace(/^http:\/\//i, 'https://');
+  }
   
   return (
     <Helmet>
