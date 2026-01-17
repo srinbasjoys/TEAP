@@ -183,11 +183,14 @@ const HomePage = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <img 
-                  src="https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6?crop=entropy&cs=srgb&fm=jpg&q=85" 
-                  alt="Cloud Technology" 
+                <OptimizedImage
+                  src="https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6"
+                  alt="Cloud Technology"
                   className="rounded-2xl shadow-2xl"
-                  data-testid="hero-image"
+                  testId="hero-image"
+                  width={600}
+                  height={400}
+                  priority={true}
                 />
               </motion.div>
             </div>
