@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Cloud, Shield, Zap, Users, TrendingUp, Award } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import SEOHead from '../components/SEOHead';
 import OptimizedImage from '../components/OptimizedImage';
 import axios from 'axios';
+import { prefersReducedMotion } from '../lib/performance';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -14,6 +15,28 @@ const API = `${BACKEND_URL}/api`;
 const HomePage = () => {
   const navigate = useNavigate();
   const [seoData, setSeoData] = useState(null);
+  
+  // Check if user prefers reduced motion
+  const shouldReduceMotion = useMemo(() => prefersReducedMotion(), []);
+  
+  // Optimized animation variants that use GPU-accelerated transforms
+  const fadeInUpVariant = useMemo(() => ({
+    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { 
+      duration: shouldReduceMotion ? 0.01 : 0.6,
+      ease: [0.25, 0.1, 0.25, 1] // Custom easing for smoother animation
+    }
+  }), [shouldReduceMotion]);
+  
+  const scaleUpVariant = useMemo(() => ({
+    initial: { opacity: 0, scale: shouldReduceMotion ? 1 : 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { 
+      duration: shouldReduceMotion ? 0.01 : 0.6,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }), [shouldReduceMotion]);
 
   useEffect(() => {
     axios.get(`${API}/seo/home`).then(res => setSeoData(res.data)).catch(() => {});
