@@ -2,10 +2,11 @@ import React from 'react';
 
 /**
  * OptimizedLogo component with WebP support and responsive sizing
+ * Fixed dimensions to prevent CLS (Cumulative Layout Shift)
  */
-const OptimizedLogo = ({ className = "h-12 w-auto", alt = "TechResona Logo" }) => {
+const OptimizedLogo = ({ className = "h-12 w-12", alt = "TechResona Logo" }) => {
   return (
-    <picture>
+    <picture style={{ display: 'block', width: '48px', height: '48px' }}>
       {/* WebP sources with responsive sizes */}
       <source
         type="image/webp"
@@ -28,6 +29,8 @@ const OptimizedLogo = ({ className = "h-12 w-auto", alt = "TechResona Logo" }) =
         width="48"
         height="48"
         loading="eager"
+        fetchpriority="high"
+        style={{ display: 'block', width: '48px', height: '48px' }}
       />
     </picture>
   );
