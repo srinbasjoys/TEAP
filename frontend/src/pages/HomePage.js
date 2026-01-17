@@ -169,9 +169,7 @@ const HomePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
               <motion.div 
                 className="md:col-span-7"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                {...fadeInUpVariant}
               >
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 font-heading tracking-tight" data-testid="hero-title">
                   Empower Your Business with
@@ -202,9 +200,7 @@ const HomePage = () => {
               
               <motion.div 
                 className="md:col-span-5"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                {...scaleUpVariant}
               >
                 <OptimizedImage
                   src="https://images.unsplash.com/photo-1633174074875-f09b1b53ecf6"
