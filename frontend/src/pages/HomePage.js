@@ -271,10 +271,16 @@ const HomePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
               <div className="md:col-span-5">
                 <img 
-                  src="https://images.unsplash.com/photo-1760611656007-f767a8082758?crop=entropy&cs=srgb&fm=jpg&q=85" 
+                  src="https://images.unsplash.com/photo-1760611656007-f767a8082758?w=800&h=600&fit=crop&fm=webp&q=75" 
+                  srcSet="https://images.unsplash.com/photo-1760611656007-f767a8082758?w=500&h=375&fit=crop&fm=webp&q=75 500w,
+                          https://images.unsplash.com/photo-1760611656007-f767a8082758?w=800&h=600&fit=crop&fm=webp&q=75 800w"
+                  sizes="(max-width: 768px) 100vw, 42vw"
                   alt="Team Collaboration" 
                   className="rounded-2xl shadow-xl"
+                  loading="lazy"
                   data-testid="why-choose-image"
+                  width="500"
+                  height="375"
                 />
               </div>
               <div className="md:col-span-7">
