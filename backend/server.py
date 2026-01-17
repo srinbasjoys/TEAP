@@ -561,7 +561,8 @@ async def get_analytics(admin: dict = Depends(get_current_admin)):
 async def generate_sitemap():
     blogs = await db.blogs.find({"published": True}, {"_id": 0, "slug": 1, "updated_at": 1}).to_list(1000)
     
-    base_url = "https://techresona.com"
+    # Use environment variable for base URL, fallback to techresona.com for production
+    base_url = os.environ.get('SITE_BASE_URL', 'https://deploy-ready-87.preview.emergentagent.com')
     
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
