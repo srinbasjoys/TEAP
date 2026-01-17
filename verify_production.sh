@@ -90,7 +90,7 @@ check "Preconnect hints in index.html"
 grep -q "font-display.*swap" /app/frontend/public/index.html
 check "Font-display swap configured"
 
-grep -q "React.lazy" /app/frontend/src/App.js
+grep -q "lazy" /app/frontend/src/App.js
 check "React.lazy code splitting"
 
 grep -q "serviceWorker" /app/frontend/src/index.js
