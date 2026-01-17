@@ -61,6 +61,55 @@ const webpackConfig = {
         ],
       };
 
+      // Production optimizations
+      if (process.env.NODE_ENV === 'production') {
+        // Optimize cache groups for better code splitting
+        webpackConfig.optimization = {
+          ...webpackConfig.optimization,
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              // Vendor libraries
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name(module) {
+                  const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                  return `vendor.${packageName.replace('@', '')}`;
+                },
+                priority: 10,
+              },
+              // React and related libraries
+              react: {
+                test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/,
+                name: 'vendor-react',
+                priority: 20,
+              },
+              // UI libraries
+              ui: {
+                test: /[\\/]node_modules[\\/](@radix-ui|framer-motion|lenis)[\\/]/,
+                name: 'vendor-ui',
+                priority: 20,
+              },
+              // Common code
+              common: {
+                minChunks: 2,
+                priority: 5,
+                reuseExistingChunk: true,
+              },
+            },
+          },
+          // Better runtime chunk
+          runtimeChunk: 'single',
+        };
+
+        // Configure output with better cache busting
+        webpackConfig.output = {
+          ...webpackConfig.output,
+          filename: 'static/js/[name].[contenthash:8].js',
+          chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+        };
+      }
+
       // Add health check plugin to webpack if enabled
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);
